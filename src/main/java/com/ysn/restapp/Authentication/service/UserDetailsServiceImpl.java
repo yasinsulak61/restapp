@@ -1,7 +1,7 @@
-package com.ysn.restapp.service;
+package com.ysn.restapp.Authentication.service;
 
-import com.ysn.restapp.dao.UserDao;
-import com.ysn.restapp.model.User;
+import com.ysn.restapp.Authentication.dao.UserDao;
+import com.ysn.restapp.Authentication.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

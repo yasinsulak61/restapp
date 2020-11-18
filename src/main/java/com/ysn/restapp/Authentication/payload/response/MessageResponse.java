@@ -1,4 +1,4 @@
-package com.ysn.restapp.payload.response;
+package com.ysn.restapp.Authentication.payload.response;
 
 public class MessageResponse {
     private String message;

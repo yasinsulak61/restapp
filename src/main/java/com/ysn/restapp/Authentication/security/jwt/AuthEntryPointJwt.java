@@ -1,4 +1,4 @@
-package com.ysn.restapp.security.jwt;
+package com.ysn.restapp.Authentication.security.jwt;
 
 import java.io.IOException;
 

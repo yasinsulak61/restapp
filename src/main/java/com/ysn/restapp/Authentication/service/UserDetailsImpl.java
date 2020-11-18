@@ -1,17 +1,19 @@
-package com.ysn.restapp.service;
+package com.ysn.restapp.Authentication.service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.ysn.restapp.model.User;
+import com.ysn.restapp.Authentication.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Data
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -24,15 +26,19 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
+    private  String dataChangeCreatedBy;
+
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String password,
+    public UserDetailsImpl(Long id, String username, String email, String password,String dataChangeCreatedBy,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.dataChangeCreatedBy = dataChangeCreatedBy;
         this.authorities = authorities;
+
     }
 
     public static UserDetailsImpl build(User user) {
@@ -45,7 +51,9 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities);
+                user.getDataChangeCreatedBy(),
+                authorities
+                );
     }
 
     @Override

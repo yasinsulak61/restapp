@@ -1,10 +1,10 @@
-package com.ysn.restapp.dao;
+package com.ysn.restapp.Authentication.dao;
 
-import java.util.Optional;
-
-import com.ysn.restapp.model.User;
+import com.ysn.restapp.Authentication.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 
 @Repository

@@ -1,7 +1,7 @@
-package com.ysn.restapp.dao;
+package com.ysn.restapp.Authentication.dao;
 
-import com.ysn.restapp.model.ERole;
-import com.ysn.restapp.model.Role;
+import com.ysn.restapp.Authentication.model.ERole;
+import com.ysn.restapp.Authentication.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

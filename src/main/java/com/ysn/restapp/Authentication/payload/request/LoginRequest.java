@@ -1,4 +1,4 @@
-package com.ysn.restapp.payload.request;
+package com.ysn.restapp.Authentication.payload.request;
 
 import lombok.Data;
 

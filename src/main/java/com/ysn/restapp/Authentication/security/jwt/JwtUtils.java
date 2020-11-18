@@ -1,8 +1,8 @@
-package com.ysn.restapp.security.jwt;
+package com.ysn.restapp.Authentication.security.jwt;
 
 import java.util.Date;
 
-import com.ysn.restapp.service.UserDetailsImpl;
+import com.ysn.restapp.Authentication.service.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

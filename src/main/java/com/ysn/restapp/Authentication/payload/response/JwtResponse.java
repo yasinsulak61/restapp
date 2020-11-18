@@ -1,4 +1,4 @@
-package com.ysn.restapp.payload.response;
+package com.ysn.restapp.Authentication.payload.response;
 
 import java.util.List;
 

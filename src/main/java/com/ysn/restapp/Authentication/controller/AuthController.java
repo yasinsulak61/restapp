@@ -1,4 +1,4 @@
-package com.ysn.restapp.controller;
+package com.ysn.restapp.Authentication.controller;
 
 import java.util.HashSet;
 import java.util.List;
@@ -7,17 +7,17 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import com.ysn.restapp.dao.RoleDao;
-import com.ysn.restapp.dao.UserDao;
-import com.ysn.restapp.model.ERole;
-import com.ysn.restapp.model.Role;
-import com.ysn.restapp.model.User;
-import com.ysn.restapp.payload.request.LoginRequest;
-import com.ysn.restapp.payload.request.SignupRequest;
-import com.ysn.restapp.payload.response.JwtResponse;
-import com.ysn.restapp.payload.response.MessageResponse;
-import com.ysn.restapp.security.jwt.JwtUtils;
-import com.ysn.restapp.service.UserDetailsImpl;
+import com.ysn.restapp.Authentication.dao.RoleDao;
+import com.ysn.restapp.Authentication.dao.UserDao;
+import com.ysn.restapp.Authentication.model.ERole;
+import com.ysn.restapp.Authentication.model.Role;
+import com.ysn.restapp.Authentication.model.User;
+import com.ysn.restapp.Authentication.payload.request.LoginRequest;
+import com.ysn.restapp.Authentication.payload.request.SignupRequest;
+import com.ysn.restapp.Authentication.payload.response.JwtResponse;
+import com.ysn.restapp.Authentication.payload.response.MessageResponse;
+import com.ysn.restapp.Authentication.security.jwt.JwtUtils;
+import com.ysn.restapp.Authentication.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -71,7 +71,6 @@ public class AuthController {
                 userDetails.getEmail(),
                 roles));
     }
-
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userDao.existsByUsername(signUpRequest.getUsername())) {
@@ -89,7 +88,7 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(signUpRequest.getPassword()), signUpRequest.getDataChangeCreatedBy());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -111,16 +110,20 @@ public class AuthController {
                         Role modRole = roleDao.findByName(ERole.ROLE_MODERATOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
-
                         break;
-                    default:
+
+                    case "user":
                         Role userRole = roleDao.findByName(ERole.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
+
+                    default:
+                        Role nullRole = roleDao.findByName(ERole.ROLE_NULL)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(nullRole);
                 }
             });
         }
-
         user.setRoles(roles);
         userDao.save(user);
 

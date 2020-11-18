@@ -1,4 +1,4 @@
-package com.ysn.restapp.payload.request;
+package com.ysn.restapp.Authentication.payload.request;
 
 import lombok.Data;
 
@@ -17,10 +17,16 @@ public class SignupRequest {
     @Email
     private String email;
 
-    private Set<String> role;
-
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+
+    @NotBlank
+    @Size(max = 40)
+    private String dataChangeCreatedBy;
+
+    private Set<String> role;
+
+
 }
 

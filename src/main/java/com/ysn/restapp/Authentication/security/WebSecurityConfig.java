@@ -1,8 +1,8 @@
-package com.ysn.restapp.security;
+package com.ysn.restapp.Authentication.security;
 
-import com.ysn.restapp.security.jwt.AuthEntryPointJwt;
-import com.ysn.restapp.security.jwt.AuthTokenFilter;
-import com.ysn.restapp.service.UserDetailsServiceImpl;
+import com.ysn.restapp.Authentication.security.jwt.AuthEntryPointJwt;
+import com.ysn.restapp.Authentication.security.jwt.AuthTokenFilter;
+import com.ysn.restapp.Authentication.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

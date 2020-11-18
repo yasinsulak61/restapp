@@ -1,6 +1,7 @@
-package com.ysn.restapp.model;
+package com.ysn.restapp.Authentication.model;
 
 
+import com.ysn.restapp.model.BaseEntity;
 import lombok.Data;
 
 import java.util.HashSet;
@@ -18,22 +19,22 @@ import javax.validation.constraints.Size;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseEntity {
 
     @NotBlank
     @Size(max = 20)
+    @Column(nullable = false)
     private String username;
 
     @NotBlank
     @Size(max = 50)
     @Email
+    @Column(nullable = false)
     private String email;
 
     @NotBlank
     @Size(max = 120)
+    @Column(nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -45,11 +46,11 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password,String dataChangeCreatedBy) {
         this.username = username;
         this.email = email;
         this.password = password;
+        setDataChangeCreatedBy(dataChangeCreatedBy);
+
     }
-
 }
-
